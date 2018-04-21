@@ -7,6 +7,13 @@ const YID = process.env.YID || require('../config/keys.js').youTube.clientID
 const YSEC = process.env.YSEC || require('../config/keys.js').youTube.clientSecret
 const API_KEY = process.env.YAPI || require('../config/keys.js').youTube.API_KEY
 
+
+router.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next()
+})
+
 // auth login
 router.get('/login', (req, res) => {
     res.render('login', { user: req.user });
