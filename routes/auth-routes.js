@@ -89,7 +89,8 @@ var moveData = async(user, userData, commentCountByVideoID) => {
     axios.post('https://fast-island-10012.herokuapp.com/comments', {
             videos: userData.videos,
             user: user,
-            comments: userData.comments
+            comments: userData.comments,
+            commentCountByVideoID: userData.commentCountByVideoID
         })
         .then((response) => {
             console.log('success posting to CR ')
