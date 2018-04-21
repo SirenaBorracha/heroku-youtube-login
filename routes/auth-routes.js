@@ -64,8 +64,6 @@ router.get('/youtube/callback',
 
 
 
-            console.log('sample of userData.video', userData.videos[33], userData.commentCountByVideoID['03W_e71rsNk'])
-            console.log(this.req.user, req.user.name, 'here')
             User.findOneAndUpdate({ _id: req.user._id }, { $set: { videos: userData.videos, comments: userData.comments, commentCountByVideoID: userData.commentCountByVideoID, wordCount: userData.wordCount } }, { upsert: true, returnNewDocument: true, fields: 'data' }, function(err, data) {
                 if (err) {
                     console.error(err.message, 'err in update db')
