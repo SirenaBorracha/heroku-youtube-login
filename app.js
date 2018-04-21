@@ -52,7 +52,6 @@ const authCheck = (req, res, next) => {
 
 // create home route
 app.get('/', authCheck, (req, res) => {
-    console.log('running')
     res.render('comments', { comments: req.user.comments, user: req.user.name })
 })
 

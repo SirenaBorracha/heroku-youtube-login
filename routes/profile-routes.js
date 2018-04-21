@@ -28,12 +28,10 @@ router.get('/videos', authCheck, (req, res) => {
     res.render('videos', r)
 })
 router.get('/video/:id', authCheck, (req, res) => {
-    console.log(req.query, req.params, "BWQ") //, req._doc.name)
     let r = { data: req.user.videos.slice(req.params.id, req.params.id + 9), user: req.user.name, thing: req.user.commentCountByVideoId }
     res.render('videos', r)
 })
 router.get('/comment/:id', authCheck, (req, res) => {
-    console.log(req.query, req.params, "BWQ") //, req._doc.name)
     let r = { comments: req.user.comments.slice(req.params.id, req.params.id + 9), user: req.user.name, thing: req.user.commentCountByVideoId }
     res.render('comments', r)
 })
@@ -44,11 +42,9 @@ router.get('/modal', authCheck, (req, res) => {
     res.render('modalTest', { user: req.user.name, comments: req.user.comments })
 })
 router.get('/search/', authCheck, (req, res) => {
-    console.log(req.query.query, req.params, "BTTTT") //, req._doc.name)
     let r = {
         comments: req.user.comments.filter(e => {
             if (e.comment.split(' ').includes(req.query.query)) {
-                console.log('found one')
                 return e
             }
         }),
