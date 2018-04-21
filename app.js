@@ -62,6 +62,6 @@ app.get('/test', (req, res) => {
 })
 
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('app now listening for requests on port 3000');
 })
