@@ -1,6 +1,6 @@
 const passport = require('passport')
 const passportSetup = require('./passport-setup')
-
+const cors = require('cors')
 const express = require('express')
 const cookieSession = require('cookie-session')
 
@@ -8,6 +8,8 @@ const cookie = process.env.CKE || require('./config/keys').session.cookieKey
 const mongo = process.env.MNG || require('./config/keys').mongodb.dbURI
 const PORT = process.env.PORT || 3000
 const app = express()
+
+app.use(cors)
 
 const authRoutes = require('./routes/auth-routes')
 const profileRoutes = require('./routes/profile-routes')
