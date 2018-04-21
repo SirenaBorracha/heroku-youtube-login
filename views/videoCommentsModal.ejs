@@ -1,0 +1,12 @@
+
+<div id="<%= data[i].videoId %>-comments" class="w3-modal">
+  <div class="w3-modal-content">
+      <span onclick="document.getElementById('<%= data[i].videoId %>-share').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <span>Link to share video: <%= data[i].title %> </span><br/>
+        <form action="/api/video/replies" method="GET">
+        
+        </form>
+                  
+        <h3>https://youtube.com/watch?v=<%= data[i].videoId %></h3><br/> 
+  </div>
+</div>

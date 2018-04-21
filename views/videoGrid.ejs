@@ -1,0 +1,29 @@
+<% if (data.length ) { %>
+<% for(var i=0; i < data.length && i< 9; i++) { %>
+<div class="grid">
+<div class="video-share">
+<ul>
+  <li><a href="#"><img src="http://ph8tel.com/images/likes.png" title="like" /></a></li>
+  <li><img src="http://ph8tel.com/images/link.png" onclick="document.getElementById('<%= data[i].videoId %>-share').style.display='block'" title="share" /></li>
+  <li><img src="http://ph8tel.com/images/views.png" onclick="document.getElementById('<%= data[i].videoId %>').style.display='block'" title="Watch" /></li>
+  <li><a href="/profile/video/comments/<%= data[i].videoId %>"><img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/chat-512.png" title="comment" height="15px" /></a></li>
+
+  </ul>
+</div>
+<img src="<%= data[i].thumbnails.high.url %>" />
+<h3><%= data[i].title %></h3>
+    <div class="grid-info">
+
+
+        <div class="clear"> </div>
+        <div class="lables">
+        <% include ./videoModal.ejs %>
+        <% include ./videoShareModal.ejs %>
+        
+        </div>
+</div>
+</div>
+<% } %>
+<% } else { %>
+<h2>No Videos </h2>
+<% } %>

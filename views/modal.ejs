@@ -1,0 +1,9 @@
+
+<button style="width: 100%"  onclick="document.getElementById('<%= comments[i].commentId %>').style.display='block'" class="w3-button w3-blue">Read Comment</button>
+
+<div id="<%= comments[i].commentId %>" class="w3-modal">
+  <div class="w3-modal-content">
+      <span onclick="document.getElementById('<%= comments[i].commentId %>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+      <%= comments[i].comment %>
+  </div>
+</div>

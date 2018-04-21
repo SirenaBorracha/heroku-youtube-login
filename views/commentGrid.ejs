@@ -1,0 +1,38 @@
+<% if (comments.length) { %>
+    <% for(var i=0; i < comments.length && i < 20; i++) { %>
+        <% if (comments[i].color) { %>
+    
+            <div class="comment-grid" style="background-color:<%= comments[i].color %>;">
+        
+        <% } else { %>
+            <div class="comment-grid" >
+        <% } %>
+
+    <div class="video-share">
+<img src="<%= comments[i].authorThumbnail %>" />
+    
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=<%= comments[i].videoId %>"><img src="http://ph8tel.com/images/likes.png" title="like" /></a></li>
+  <li><a href="https://www.youtube.com/watch?<%= comments[i].videoId %>"><img src="http://ph8tel.com/images/link.png" title="share" /></a></li>
+  <li><a href="https://www.youtube.com/watch?<%= comments[i].videoId %>"><img src="http://ph8tel.com/images/views.png" title="Watch" /></a></li>
+  <li><a href="https://www.youtube.com/watch?<%= comments[i].videoId %>"><img src="https://cdn3.iconfinder.com/data/icons/gray-toolbar-4/512/chat-512.png" title="comment" height="15px" /></a></li>
+</ul>
+</div>
+
+
+    <div class="grid-info" >
+<% include ./modal.ejs %>
+    
+    <h3><%= comments[i].author %></h3>
+        <div class="clear"> </div>
+        
+        <div class="lables">
+        
+        </div>
+</div>
+</div>
+<% } %>
+<% } else { %>
+<p>no comments</p>
+<% } %>
+

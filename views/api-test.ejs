@@ -1,0 +1,99 @@
+<% include ./html-header.ejs %>
+
+<% include ./nav-bar.ejs %>
+<body>
+    <h1>CURRENT WORKING API ROUTES</h1>
+    <h3><a href="/api/comments/refresh">REFRESH CURRENT USER COMENTS</a></h3>
+    <h3><a href="/api/user/all-data">ALL DATA FOR CURRENT USER</a></h3>
+
+    <a href="/testing/post"> TEST POST COMMENT TO VIDEO</a>
+<form name="reply-form" method="POST" action="/api/comments/replytodirect">
+  <table>
+    <tr>
+      <td>reply to a comment</td>
+      <td>Video ID<input type="text" name="videoId" ></td>
+      <td>Comment ID<input type="text" name="commentId" ></td>
+      <td>Comment Text<input type="text" name="textOriginal" ></td>
+      <td><button type="submit">POST REPLY TOCOMMENT</button></td>
+    </tr>
+  </table>
+</form>
+</form>
+    <form name="commentPoster" method="POST" action="/api/comments/uploader">
+    <table>
+      <tr>
+        <td>post a comment</td>
+        <td>Channel ID<input type="text" name="chanId" ></td>
+        <td>Video ID<input type="text" name="videoId" ></td>
+        <td>Comment Text<input type="text" name="textOriginal" ></td>
+        <button type="submit">POST COMMENT</button>
+        
+      </tr>
+    </table>
+</form>
+<form name="refresher" method="GET" action="/api/comments/refresh">
+    <table>
+      <tr>
+        <td>Refresh User Comments by userId</td>
+        <td>"/api/comments/refresh"<input type="text" name="chanId" ></td>
+      </tr>
+    </table>
+</form>
+<form name="form1" method="POST" action="/api/all-data/by-name">
+    <table>
+      <tr>
+        <td>Get all data by User Name</td>
+        <td>"/api/all-data/by-name?name=<input type="text" name="name" ></td>
+      </tr>
+    </table>
+</form>
+<form name="allbyid" method="POST" action="/api/all-data/by-id">
+    <table>
+      <tr>
+        <td>Get all data by User ID</td>
+        <td>"/api/all-data/by-id?id=<input type="text" name="id" >"</td>
+      </tr>
+    </table>
+</form>
+<form name="comsbyname" method="POST" action="/api/comments/by-name">
+    <table>
+    <tr>
+      <td>Get all comments by User Name</td>
+      <td>"/api/comments/by-name?name=<input type="text" name="name" >"</td>
+      </tr>
+    </table>
+</form>
+<form name="comsbyid" method="POST" action="/api/comments/by-id">
+  <table>
+    <tr> 
+      <td>Get all comments by User Id</td>
+      <td>"/api/comments/by-id?id=<input type="text" name="id" >"</td>
+    </tr>
+  </table>
+</form>    
+<form name="vidsbyname" method="POST" action="/api/videos/by-name">
+  <table>
+    <tr>
+      <td>Get all comments by User Name</td>
+      <td>"/api/videos/by-name?name=<input type="text" name="name" >"</td>
+    </tr>
+  </table>
+</form>
+<form name="vidsbyid" method="POST" action="/api/videos/by-id">
+  <table>
+    <tr>
+      <td>Get all comments by User Id</td>
+      <td> "/api/videos/by-id?id=<input type="text" name="id" >"</td>
+    </tr>
+  </table>
+</form>
+  
+    
+        <a href="/api/sample">
+            <li>get Comments sample</li>
+        </a>
+
+    </ul>
+</body>
+
+</html>
