@@ -56,29 +56,21 @@ router.get('/youtube/callback',
 
         let userComplete = req.user
 
-        youtube.gimmeAll(req.user._id, API_KEY)
+        let rawData = await youtube.gimmeAll(req.user._id, API_KEY)
 
-        .then(rawData => {
+        let userData = formatData(rawData)
 
-            let userData = formatData(rawData)
-
-
-
-            User.findOneAndUpdate({ _id: req.user._id }, { $set: { videos: userData.videos, comments: userData.comments, commentCountByVideoID: userData.commentCountByVideoID, wordCount: userData.wordCount } }, { upsert: true, returnNewDocument: true, fields: 'data' }, function(err, data) {
-                if (err) {
-                    console.error(err.message, 'err in update db')
-                }
-            })
-
-            moveData(req.user, userData, userData.commentCountByVideoID)
-            res.redirect(`http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/${req.user.name}/${req.user._id}`)
-                // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
-                // res.render('comments', r)
-        }).catch(err => {
-            console.error(err.message)
-
-            res.redirect('http://localhost:8080')
+        User.findOneAndUpdate({ _id: req.user._id }, { $set: { videos: userData.videos, comments: userData.comments, commentCountByVideoID: userData.commentCountByVideoID, wordCount: userData.wordCount } }, { upsert: true, returnNewDocument: true, fields: 'data' }, function(err, data) {
+            if (err) {
+                console.error(err.message, 'err in update db')
+            }
         })
+
+        moveData(req.user, userData, userData.commentCountByVideoID)
+        res.redirect(`http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/${req.user.name}/${req.user._id}`)
+            // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
+            // res.render('comments', r)
+
     })
 
 // callback route for google to redirect to
