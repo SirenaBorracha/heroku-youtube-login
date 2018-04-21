@@ -14,9 +14,7 @@ router.get('/login', (req, res) => {
 
 // auth logout
 router.get('/logout', (req, res) => {
-    console.log('before, ', req.user)
     req.logout();
-    console.log('logged out, now', req.user)
     res.redirect('/');
 });
 
@@ -48,7 +46,6 @@ router.get('/youtube/callback',
     passport.authenticate('youtube'),
 
     async(req, res) => {
-        console.log('ran')
 
         let userComplete = req.user
 

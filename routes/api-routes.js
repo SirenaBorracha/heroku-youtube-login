@@ -25,7 +25,6 @@ router.use((req, res, next) => {
 
 router.get('/user/tokens/:id', (req, res) => {
     let userId = req.params.id;
-    console.log('user info is', userId)
     res.json(req.user)
 })
 
@@ -33,7 +32,7 @@ router.post('/comments/by-name/', (req, res) => {
     if (req.query.name || req.body.name) {
         User.find({ name: req.query.name || req.body.name }, function(err, data) {
             if (err) {
-                console.log(err)
+                console.error(err.message)
             }
             res.json(data[0].comments)
         }).catch(err => res.send('error finding by name'))
@@ -72,7 +71,7 @@ router.post('/videos/by-name/', (req, res) => {
     if (req.query.name || req.body.name) {
         User.find({ name: req.query.name || req.body.name }, function(err, data) {
             if (err) {
-                console.log(err)
+                console.error(err.message)
             }
             res.json(data[0].videos)
         }).catch(err => res.send('error finding by name'))
@@ -104,7 +103,7 @@ router.get('/all-data/by-id', (req, res) => {
     if (req.query.id || req.body.id) {
         User.find({ _id: req.query.id || req.body.id }, function(err, data) {
             if (err) {
-                console.log(err)
+                console.error(err.message)
             }
             res.json(data)
         }).catch(err => res.send('error finding by id'))
@@ -129,7 +128,7 @@ router.post('/all-data/by-name', (req, res) => {
     if (req.query.name || req.body.name || req.params.name) {
         User.find({ name: req.query.name || req.body.name }, function(err, data) {
             if (err) {
-                console.log(err)
+                console.error(err.message)
             }
             res.json(data)
         }).catch(err => res.send('error finding by name'))
@@ -141,7 +140,7 @@ router.post('/all-data/by-name', (req, res) => {
 router.get('/sample', (req, res) => {
     User.find({ name: 'ph8tel' }, function(err, data) {
         if (err) {
-            console.log(err)
+            console.error(err.message)
         }
         res.json(data)
     }).catch(err => res.send('error finding by name'))
@@ -154,7 +153,6 @@ router.get('comments/reply/thread', async(req, res) => {
 })
 
 router.get('/comments/refresh', async(req, res) => {
-    console.log('user', req.user)
     let newComments = await youtube.getComments(req.user._id, API_KEY)
     req.user.comments = newComments
     let dbParams = { comments: newComments }
@@ -186,7 +184,7 @@ router.get('/comments/replytodirect/', (req, res) => {
 
     youTubeDataApi.comments.insert(params, (err, info) => {
         if (err) {
-            console.log('hit failure', err.message)
+            console.error('hit failure inserting comment', err.message)
             res.status(400).send("failed posting comment")
         } else {
             console.log('comment posted', info.statusText)
@@ -219,7 +217,7 @@ router.post('/comments/replytodirect/', (req, res) => {
 
     youTubeDataApi.comments.insert(params, (err, info) => {
         if (err) {
-            console.log('hit failure', err.message)
+            console.error('hit failure posting comment', err.message)
             res.status(400).send("failed posting comment")
         } else {
             console.log('comment posted', info.statusText)

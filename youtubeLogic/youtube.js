@@ -40,7 +40,7 @@ module.exports = youtubeLogic = {
             }
             youTubeDataApi.commentThreads.insert(params, (err, info) => {
                 if (err) {
-                    console.log('Failure posting comment. This is how you messed up:', err.message);
+                    console.error('Failure posting comment. This is how you messed up:', err.message);
                     resolve("failed posting comment");
                 } else {
                     console.log('comment posted', info.statusText);
@@ -87,7 +87,7 @@ module.exports = youtubeLogic = {
 
             youTubeDataApi.commentThreads.insert(params, (err, info) => {
                 if (err) {
-                    console.log('Failure posting comment. This is how you messed up:', err.message);
+                    console.error('Failure posting comment. This is how you messed up:', err.message);
                     resolve("failed posting comment");
                 } else {
                     console.log('comment posted', info.statusText);
@@ -163,7 +163,6 @@ module.exports = youtubeLogic = {
             axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
                 params: params
             }).then(allVideos => {
-                console.log(allVideos.data.items[0], "SAMPLE")
                 let formattedVideos = allVideos.data.items.map(youtubeLogic.formattVideos)
                 youtubeLogic.videoHolder.concat(formattedVideos)
 
@@ -202,7 +201,7 @@ module.exports = youtubeLogic = {
                     }
                 })
                 .then(deets => resolve(deets))
-                .catch(err => console.log('error in get chan infoerr', err.message))
+                .catch(err => console.error('error in get channel info', err.message))
         })
     },
 
@@ -305,7 +304,7 @@ module.exports = youtubeLogic = {
                     resolve(youtubeLogic.commentHolder.concat(formattedComments))
                 }
             }).catch(err => {
-                console.log('error here is', err.message)
+                console.error('error getting comments', err.message)
                 resolve(err.message)
             })
         })
@@ -340,7 +339,7 @@ module.exports = youtubeLogic = {
                     resolve(youtubeLogic.commentHolder.concat(formattedComments))
                 }
             }).catch(err => {
-                console.log('error here is', err.message)
+                console.error('error getting comments is:', err.message)
                 resolve(err.message)
             })
         })

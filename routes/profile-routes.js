@@ -16,8 +16,7 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/', authCheck, (req, res) => {
-    console.log(Object.keys(req.user.name), )
-    res.render('youtubeVideos', { user: req.user, comments: req.user._doc.comments, data: req.user._doc.videos });
+    res.render('comments', { user: req.user.name, comments: req.user.comments })
 });
 router.get('/video/comments/:id', authCheck, async(req, res) => {
     let videoComments = await youtube.getCommentsForVideo(req.params.id, API_KEY)

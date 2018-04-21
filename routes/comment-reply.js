@@ -11,7 +11,6 @@ const oauth2Client = new OAuth2(YID, YSEC, [])
 const User = require('../models/user-model')
 
 router.get('/post', (req, res) => {
-    console.log('now in post test the token is ', req.user)
     User.findOne({ _id: req.user._id }).then((currentUser) => {
         if (currentUser) {
             done(null, currentUser);
@@ -41,7 +40,7 @@ router.get('/post', (req, res) => {
 
     youTubeDataApi.commentThreads.insert(params, (err, info) => {
         if (err) {
-            console.log('hit failure', err.message);
+            console.error('hit failure in comment instert', err.message);
             res.status(400).send("failed posting comment");
         } else {
             console.log('comment posted', info.statusText);
