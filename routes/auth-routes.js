@@ -62,7 +62,7 @@ router.get('/youtube/callback',
             })
 
             moveData(req.user, userData, userData.commentCountByVideoID)
-            res.redirect(`http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/${req.user.name}/${req.user._id}`)
+            res.redirect(`https://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/${req.user.name}/${req.user._id}`)
                 // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
                 // res.render('comments', r)
         }).catch(err => {
