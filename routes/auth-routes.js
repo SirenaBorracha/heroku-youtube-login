@@ -61,9 +61,8 @@ router.get('/youtube/callback',
                 }
             })
 
-            // moveData(req.user, userData, userData.commentCountByVideoID)
+            moveData(req.user, userData, userData.commentCountByVideoID)
             res.redirect(`http://mariner-front-end.s3-website.us-east-2.amazonaws.com/${req.user.name}/${req.user._id}`)
-                // res.redirect(`http://localhost:5000/${req.user.name}/${req.user._id}`)
                 // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
                 // res.render('comments', r)
         }).catch(err => {
