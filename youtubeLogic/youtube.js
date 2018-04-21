@@ -229,17 +229,6 @@ module.exports = youtubeLogic = {
 
             let commentObjects = await this.getComments(channelId, API_KEY)
             let videoObjects = await this.getPlaylists(uploadsID, API_KEY)
-            let commentCountByVideoID
-            if (commentObjects && commentObjects.length) {
-                commentCountByVideoID = commentObjects.reduce((cc, inc) => {
-                    cc[inc.videoId] ? cc[inc.videoId]++ : cc[inc.videoId] = 1
-                    return cc
-                })
-            }
-            videoObjects.forEach(e => {
-                e.commentCount = commentCountByVideoID[e.id]
-            })
-            console.log('done formatting ccount', videoObjects[0])
 
             let responseObject = {
                 videos: videoObjects,

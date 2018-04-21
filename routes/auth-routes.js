@@ -62,13 +62,17 @@ router.get('/youtube/callback',
 
             let userData = formatData(rawData)
 
+
+
+            console.log('sample of userData.video', userData.videos[33], userData.commentCountByVideoID['03W_e71rsNk'])
+
             User.findOneAndUpdate({ _id: req.user._id }, { $set: { videos: userData.videos, comments: userData.comments, commentCountByVideoID: userData.commentCountByVideoID, wordCount: userData.wordCount } }, { upsert: true, returnNewDocument: true, fields: 'data' }, function(err, data) {
                 if (err) {
                     console.error(err.message, 'err in update db')
                 }
             })
 
-            moveData(req.user, userData, userData.commentCountByVideoID)
+            // moveData(req.user, userData, userData.commentCountByVideoID)
             res.redirect(`http://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/${req.user.name}/${req.user._id}`)
                 // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
                 // res.render('comments', r)
@@ -104,22 +108,37 @@ var moveData = async(user, userData, commentCountByVideoID) => {
 var formatData = (userData) => {
     if (userData.comments && userData.comments.length) {
         userData.commentCountByVideoID = userData.comments.reduce((cc, inc) => {
-            cc[inc] ? cc[inc]++ : cc[inc] = 1
+            cc[inc.videoId] ? cc[inc.videoId]++ : cc[inc.videoId] = 1
             return cc
         })
-    }
-    if (userData.Videos && userData.videos.length) {
-        userData.videos.forEach(video => {
-            if (userData.commentCountByVideoID[video.videoId]) {
-                video.commentCount = userData.commentCountByVideoID[video.videoId]
+        for (let i = 0; i < userData.comments; i++) {
+            if (userData.commentCountByVideoID[userData.comments[i].videoId]) {
+                userData.commentCountByVideoID[userData.comments[i].videoId]++
+            } else {
+                userData.commentCountByVideoID[userData.comments[i].videoId] = 1
             }
-        })
-
-        userData.wordCount = userData.videos.reduce((wc, inc) => {
-            wc[inc] ? wc[inc]++ : wc[inc] = 1
-            return wc
-        })
+        }
+        console.log('created obect', Object.keys(userData.commentCountByVideoID))
     }
+    // userData.videos.forEach(video => {
+    //     if (userData.commentCountByVideoID[video.videoId]) {
+    //         video.commentCount = userData.commentCountByVideoID[video.videoId]
+    //         console.log('video cc', video.commentCount)
+    //     }
+    // })
+    console.log('if fired')
+    userData.videos.map(video => {
+        video.commentCount = userData.commentCountByVideoID[video.videoId]
+        console.log('setting comment count', video.commentCount)
+
+        return video
+    })
+    userData.wordCount = userData.videos.reduce((wc, inc) => {
+        wc[inc] ? wc[inc]++ : wc[inc] = 1
+        return wc
+    })
+
+
     return userData
 }
 
