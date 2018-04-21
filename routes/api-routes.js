@@ -24,11 +24,11 @@ router.use((req, res, next) => {
 })
 
 
-router.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8080")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    next()
-})
+// router.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "http://localhost:8080")
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+//     next()
+// })
 
 router.get('/user/tokens/:id', (req, res) => {
     let userId = req.params.id;
