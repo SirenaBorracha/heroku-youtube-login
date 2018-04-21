@@ -78,6 +78,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
     res.render('profile', { user: req.user });
 })
 
+
 var moveData = async(user, userData, commentCountByVideoID) => {
 
     axios.post('https://fast-island-10012.herokuapp.com/comments', {
