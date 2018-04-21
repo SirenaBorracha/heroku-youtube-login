@@ -65,9 +65,10 @@ router.get('/youtube/callback',
             })
 
             // moveData(req.user, userData, userData.commentCountByVideoID)
-            // res.redirect(`http://localhost:5000/${req.user.name}/${req.user._id}`)
-            let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
-            res.render('comments', r)
+            res.redirect(`http://mariner-front-end.s3-website.us-east-2.amazonaws.com/${req.user.name}/${req.user._id}`)
+                // res.redirect(`http://localhost:5000/${req.user.name}/${req.user._id}`)
+                // let r = { comments: req.user.comments, user: req.user.name, thing: req.user.commentCountByVideoId }
+                // res.render('comments', r)
         }).catch(err => {
             console.error(err.message)
 
@@ -82,7 +83,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 var moveData = async(user, userData, commentCountByVideoID) => {
 
-    axios.post('http://localhost:5001/comments', {
+    axios.post('https://fast-island-10012.herokuapp.com/comments', {
             videos: userData.videos,
             user: user,
             comments: userData.comments
