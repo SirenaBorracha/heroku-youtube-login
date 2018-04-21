@@ -16,7 +16,7 @@ const authCheck = (req, res, next) => {
 };
 
 router.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://mariner-env.77qi7qvbf8.us-east-2.elasticbeanstalk.com/")
+    res.header("Access-Control-Allow-Origin", "http://mariner-front-end.s3-website.us-east-2.amazonaws.com")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
 })
