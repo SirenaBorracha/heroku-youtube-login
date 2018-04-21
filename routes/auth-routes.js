@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 var axios = require('axios')
-var youtube = require('../youtubelogic/youtube')
+var youtube = require('../youtubelogic/youtube.js')
 const User = require('../models/user-model');
 const YID = process.env.YID || require('../config/keys.js').youTube.clientID
 const YSEC = process.env.YSEC || require('../config/keys.js').youTube.clientSecret
