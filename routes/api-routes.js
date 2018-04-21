@@ -17,6 +17,7 @@ const User = require('../models/user-model');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+
 router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://mariner-front-end.s3-website.us-east-2.amazonaws.com")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
