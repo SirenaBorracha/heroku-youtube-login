@@ -1,3 +1,4 @@
+some friggin nonsense
 Must run on port 3000
 
 API ROUTES:
@@ -6,7 +7,7 @@ API ROUTES:
 
 /all-data/by-nam -gets all data by name. So send the name of the user
 
-/videos/by-id 
+/videos/by-id
 
 /videos/by-name
 
